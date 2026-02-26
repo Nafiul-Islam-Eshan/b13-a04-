@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker</title>
+    
+    <!-- DaisyUI + Tailwind -->
+     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Geist font -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            font-family: "Geist", sans-serif;
+        }
+    </style>
+</head>
+<body class="my-15">
+    <header class="max-w-[90%] mx-auto space-y-5">
+        <!-- Header title -->
+        <h1 class="text-4xl font-bold leading-8">Job Application Tracker</h1>
+        
+        
+        <!-- total, interview, rejected coount boxes -->
+        <div class="sm:grid sm:grid-cols-3 sm:gap-3 space-y-3">
+            <!-- total count box -->
+            <div class="shadow-2xl p-5 rounded-2xl bg-base-200">
+                <p>Total</p>
+                <p id="totalCount" class="text-2xl font-bold">0</p>
+            </div>
+            <!-- Interview count box -->
+            <div class="shadow-2xl p-5 rounded-2xl bg-base-200">
+                <p>Total</p>
+                <p id="interviewCount" class="text-2xl font-bold text-green-500">0</p>
+            </div>
+            <!-- Rejected count box -->
+             <div class="shadow-2xl p-5 rounded-2xl bg-base-200" >
+                <p>Rejected</p>
+                <p id="rejectedCount" class="text-2xl font-bold text-red-500">0</p>
+             </div>
+        </div>
+    </header>
+</body>
+</html>
