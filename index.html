@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Tracker</title>
-    
+
     <!-- DaisyUI + Tailwind -->
-     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- Geist font -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
 
     <style>
-        *{
+        * {
             font-family: "Geist", sans-serif;
         }
     </style>
 </head>
+
 <body class="my-15 space-y-16">
     <header class="max-w-[90%] mx-auto space-y-5">
         <!-- Header title -->
         <h1 class="sm:text-4xl text-[28px] font-bold leading-8 text-[#002C5C]">Job Application Tracker</h1>
-        
-        
+
+
         <!-- total, interview, rejected coount boxes -->
         <div class="sm:grid sm:grid-cols-3 sm:gap-3 space-y-3 sm:space-y-0">
             <!-- total count box -->
@@ -39,10 +41,10 @@
                 <p id="interviewCount" class="text-2xl font-bold text-green-500">0</p>
             </div>
             <!-- Rejected count box -->
-             <div class="shadow-2xl p-5 rounded-2xl bg-base-200" >
+            <div class="shadow-2xl p-5 rounded-2xl bg-base-200">
                 <p class="text-[#323B49]">Rejected</p>
                 <p id="rejectedCount" class="text-2xl font-bold text-red-500">0</p>
-             </div>
+            </div>
         </div>
     </header>
 
@@ -50,26 +52,36 @@
     <!-- Available Job section -->
     <section class="max-w-[90%] mx-auto space-y-5">
         <!-- 1st part ==> Left (Available jobs)  + Right (how many)  -->
-         <div class="flex justify-between mb-6">
+        <div class="flex justify-between mb-6">
             <p class="text-5 font-semibold text-[#002C5C]">Available Jobs</p>
             <p class="text-[#323B49]"><span id="availableJobQuantity">0</span> Jobs</p>
-         </div>
+        </div>
 
-         
-         <!-- 2nd part ==> navbar of all, Interview, Rejected  -->
-          <div class="flex gap-3 mb-4">
+
+        <!-- 2nd part ==> navbar of all, Interview, Rejected  -->
+        <div class="flex gap-3 mb-4">
             <button class="btn btn-primary">All</button>
             <button class="btn ">Interview</button>
             <button class="btn">Rejected</button>
-          </div>
+        </div>
 
 
         <!-- 3rd part ==> Job info cards -->
-         <div id="jobInfoCards" class="space-y-4">
+        <div id="jobInfoCards" class="space-y-4">
             <!-- Card 1 ==> Mobile First Corp -->
-             <div id="jobInfoCard1" class=""></div>
-         </div>
-          
+            <div id="jobInfoCard1" class="p-6">
+                <h1 class="font-extrabold text-lg text-[#002C5C]">Mobile First Corp</h1>
+                <p class="text-[#323B49] text-base">React Native Developer</p>
+                <p class="my-5">Remote • Full-time • $130,000 - $175,000</p>
+                <span id="jobStatus" class="bg-[#EEF4FF] text-[#002C5C] px-3 py-2">NOT APPLIED</span>
+                <p class="text-[#323B49] mt-2 mb-5">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                
+                <button class="btn btn-outline btn-success">INTERVIEW</button>
+                <button class="btn btn-outline btn-error">REJECTED</button>
+            </div>
+        </div>
+
     </section>
 </body>
+
 </html>
