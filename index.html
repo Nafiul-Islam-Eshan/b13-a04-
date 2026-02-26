@@ -20,30 +20,49 @@
         }
     </style>
 </head>
-<body class="my-15">
+<body class="my-15 space-y-16">
     <header class="max-w-[90%] mx-auto space-y-5">
         <!-- Header title -->
-        <h1 class="sm:text-4xl text-[28px] font-bold leading-8">Job Application Tracker</h1>
+        <h1 class="sm:text-4xl text-[28px] font-bold leading-8 text-[#002C5C]">Job Application Tracker</h1>
         
         
         <!-- total, interview, rejected coount boxes -->
         <div class="sm:grid sm:grid-cols-3 sm:gap-3 space-y-3">
             <!-- total count box -->
             <div class="shadow-2xl p-5 rounded-2xl bg-base-200">
-                <p>Total</p>
-                <p id="totalCount" class="text-2xl font-bold">0</p>
+                <p class="text-[#323B49]">Total</p>
+                <p id="totalCount" class="text-2xl font-bold text-[#002C5C]">0</p>
             </div>
             <!-- Interview count box -->
             <div class="shadow-2xl p-5 rounded-2xl bg-base-200">
-                <p>Total</p>
+                <p class="text-[#323B49]">Total</p>
                 <p id="interviewCount" class="text-2xl font-bold text-green-500">0</p>
             </div>
             <!-- Rejected count box -->
              <div class="shadow-2xl p-5 rounded-2xl bg-base-200" >
-                <p>Rejected</p>
+                <p class="text-[#323B49]">Rejected</p>
                 <p id="rejectedCount" class="text-2xl font-bold text-red-500">0</p>
              </div>
         </div>
     </header>
+
+
+    <!-- Available Job section -->
+    <section class="max-w-[90%] mx-auto space-y-5">
+        <!-- 1st part ==> Left (Available jobs)  + Right (how many)  -->
+         <div class="flex justify-between mb-6">
+            <p class="text-5 font-semibold text-[#002C5C]">Available Jobs</p>
+            <p class="text-[#323B49]"><span id="availableJobQuantity">0</span> Jobs</p>
+         </div>
+
+         
+         <!-- 2nd part ==> navbar of all, Interview, Rejected  -->
+          <div class="flex gap-3">
+            <button class="btn btn-primary">All</button>
+            <button class="btn ">Interview</button>
+            <button class="btn">Rejected</button>
+          </div>
+          
+    </section>
 </body>
 </html>
