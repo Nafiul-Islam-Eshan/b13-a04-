@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -70,17 +70,29 @@
         <div id="jobInfoCards" class="space-y-4">
             <!-- Card 1 ==> Mobile First Corp -->
             <div id="jobInfoCard1" class="p-6">
-                <h1 class="font-extrabold text-lg text-[#002C5C]">Mobile First Corp</h1>
-                <p class="text-[#323B49] text-base">React Native Developer</p>
+                <div class="flex justify-between">
+                    <div class="">
+                        <h1 class="font-extrabold text-lg text-[#002C5C]">Mobile First Corp</h1>
+                        <p class="text-[#323B49] text-base">React Native Developer</p>
+                    </div>
+                    <button id="deleteBtn" class="btn btn-circle">
+                        <img src="./delete.png" alt="">
+                    </button>
+                </div>
+
                 <p class="my-5">Remote • Full-time • $130,000 - $175,000</p>
+
                 <span id="jobStatus" class="bg-[#EEF4FF] text-[#002C5C] px-3 py-2">NOT APPLIED</span>
+
                 <p class="text-[#323B49] mt-2 mb-5">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
                 
                 <button class="btn btn-outline btn-success">INTERVIEW</button>
                 <button class="btn btn-outline btn-error">REJECTED</button>
             </div>
+            
+            
+            
         </div>
-
     </section>
 </body>
 
