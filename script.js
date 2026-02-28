@@ -10,6 +10,7 @@ let availableJobQuantity = document.querySelector("#availableJobQuantity");
 
 const jobInfoCards = document.querySelector("#jobInfoCards");
 const totalJobs = jobInfoCards.children.length;
+const interviewRejectedBtns =document.getElementsByClassName("jobResult")
 
 function calculateJobCount () {
     totalCount.innerText = totalJobs;
@@ -36,4 +37,12 @@ function calculateJobCount () {
     // adding class to selected btn
     selectedBtn.classList.add("btn-primary")
 
+ }
+
+
+
+ for (const interviewRejectedBtn of interviewRejectedBtns) {
+    interviewRejectedBtn.addEventListener("click", function(event){
+    console.log(event.target.parentNode);
+    });
  }
