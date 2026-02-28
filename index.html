@@ -50,24 +50,24 @@
 
 
     <!-- Available Job section -->
-    <section class="max-w-[90%] mx-auto space-y-5">
+    <main id="mainContainer" class="max-w-[90%] mx-auto space-y-5">
         <!-- 1st part ==> Left (Available jobs)  + Right (how many)  -->
-        <div class="flex justify-between mb-6">
+        <section class="flex justify-between mb-6">
             <p class="text-5 font-semibold text-[#002C5C]">Available Jobs</p>
             <p class="text-[#323B49]"><span id="availableJobQuantity">0</span> Jobs</p>
-        </div>
+        </section>
 
 
-        <!-- 2nd part ==> navbar of all, Interview, Rejected  -->
-        <div class="flex gap-3 mb-4">
-            <button class="btn btn-primary">All</button>
-            <button class="btn ">Interview</button>
-            <button class="btn">Rejected</button>
-        </div>
+        <!-- 2nd part ==> tab of all, Interview, Rejected  -->
+        <section class="flex gap-3 mb-4">
+            <button id="tab-btn-all" class="btn btn-primary">All</button>
+            <button id="tab-btn-interview" class="btn ">Interview</button>
+            <button id="tab-btn-rejected" class="btn">Rejected</button>
+        </section>
 
 
         <!-- 3rd part ==> Job info cards -->
-        <div id="jobInfoCards" class="space-y-4">
+        <section id="jobInfoCards" class="space-y-4">
             <!-- Card 1 ==> Mobile First Corp -->
             <div id="jobInfoCard1" class="p-6">
                 <div class="flex justify-between">
@@ -263,8 +263,10 @@
             
             
             
-        </div>
-    </section>
+        </section>
+    </main>
+
+    <script src="/script.js"></script>
 </body>
 
 </html>
