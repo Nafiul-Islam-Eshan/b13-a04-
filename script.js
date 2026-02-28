@@ -21,6 +21,19 @@ function calculateJobCount () {
  calculateJobCount ();
 
 
- function toggleStyle() {
+ function toggleStyle(id) {
+    // Get all tab btns
+    const allBtn = document.querySelector("#tab-btn-all");
+    const interviewBtn = document.querySelector("#tab-btn-interview");
+    const rejectedBtn = document.querySelector("#tab-btn-rejected");
+    const selectedBtn = document.getElementById(id)
     
+    // removing class from all
+    allBtn.classList.remove("btn-primary")
+    interviewBtn.classList.remove("btn-primary")
+    rejectedBtn.classList.remove("btn-primary")
+
+    // adding class to selected btn
+    selectedBtn.classList.add("btn-primary")
+
  }
