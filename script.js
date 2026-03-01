@@ -197,4 +197,58 @@ for (const interviewRejectedBtn of interviewRejectedBtns) {
 
 
 
+document.querySelector("#tabBtns").addEventListener("click", function(event){
 
+  const availableJobQuantity = document.querySelector("#availableJobQuantity")
+  const allCards = document.querySelector("#jobInfoCards")
+  const noJobCard = document.querySelector("#noJobCard")
+  const interviewCards = document.querySelector("#interviewCards")
+  const rejectedCards = document.querySelector("#rejectedCards")
+
+
+  if (event.target.innerText === "All"){
+    availableJobQuantity.innerText = jobInfoCards.children.length;
+    allCards.classList.remove("hidden");
+    noJobCard.classList.add("hidden");
+    interviewCards.classList.add("hidden");
+    rejectedCards.classList.add("hidden");
+  }
+  else if (event.target.innerText === "Interview"){
+
+    availableJobQuantity.innerText = interviewCards.children.length;
+
+    if (interviewCards.children.length === 0){
+      allCards.classList.add("hidden");
+      noJobCard.classList.remove("hidden");
+      interviewCards.classList.add("hidden");
+      rejectedCards.classList.add("hidden");
+    }
+
+    else{
+      allCards.classList.add("hidden");
+      noJobCard.classList.add("hidden");
+      interviewCards.classList.remove("hidden");
+      rejectedCards.classList.add("hidden");
+    }
+  }
+  else if (event.target.innerText === "Rejected"){
+    
+     availableJobQuantity.innerText = rejectedCards.children.length;
+
+    if (rejectedCards.children.length === 0){
+      allCards.classList.add("hidden");
+      noJobCard.classList.remove("hidden");
+      interviewCards.classList.add("hidden");
+      rejectedCards.classList.add("hidden");
+    }
+
+    else{
+      allCards.classList.add("hidden");
+      noJobCard.classList.add("hidden");
+      interviewCards.classList.add("hidden");
+      rejectedCards.classList.remove("hidden");
+    }
+  }
+
+
+})

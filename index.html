@@ -60,7 +60,7 @@
 
 
         <!-- 2nd part ==> tab button of all, Interview, Rejected  -->
-        <section class="flex gap-3 mb-4">
+        <section id="tabBtns" class="flex gap-3 mb-4">
             <button onclick="toggleStyle('tab-btn-all')" id="tab-btn-all" class="btn btn-primary">All</button>
             <button onclick="toggleStyle('tab-btn-interview')" id="tab-btn-interview" class="btn ">Interview</button>
             <button onclick="toggleStyle('tab-btn-rejected')" id="tab-btn-rejected" class="btn">Rejected</button>
@@ -268,7 +268,7 @@
 
 
         <!-- 4th part ==> No jobs (if no cards available to show) -->
-         <section class="bg-base-100 rounded-lg hidden">
+         <section id="noJobCard" class="bg-base-100 rounded-lg hidden">
             <div class="flex flex-col justify-center items-center md:py-[100px] sm:py-[80px] py-[50px]">
                 <img src="./jobs.png" alt="" class="mb-5">
                 <h2 class="text-[#002C5C] text-2xl">No jobs available</h2>
@@ -278,10 +278,10 @@
 
 
         <!-- Interview selected cards -->
-         <section id="interviewCards" class="space-y-4"></section>
+         <section id="interviewCards" class="space-y-4 hidden"></section>
 
         <!-- Rejected selected cards -->
-         <section id="rejectedCards" class="space-y-4">
+         <section id="rejectedCards" class="space-y-4 hidden">
 
          </section>
     </main>
