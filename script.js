@@ -56,22 +56,30 @@ for (const interviewRejectedBtn of interviewRejectedBtns) {
       jobDescription,
     };
 
+
     // find interviewList contains the object or not
-    const isExist = interviewList.find(
-      (element) => jobInfo.industryName === element.industryName,
+    const isExistInInterview = interviewList.find(
+      (element) => jobInfo.industryName === element.industryName
+    );
+    
+
+    // find rejected contains the object or not
+    const isExistInRejected = rejectedList.find(
+      (element) => jobInfo.industryName === element.industryName
     );
 
-    // if not exist 
-    if (!isExist) {
+
+
+    // if not exist in interviewList...
+    if (!isExistInRejected && !isExistInInterview && event.target.innerText === "INTERVIEW") {
+
       // push the object to the interviewList array
       interviewList.push(jobInfo);
-
-      if (event.target.innerText === "INTERVIEW") {
+      
         // loop through the every single element(object) of the interviewList array
         for (const interview of interviewList) {
           const newDiv = document.createElement("div");
-          newDiv.className =
-            "p-6 bg-base-100 rounded-lg border-l-6 border-l-green-500";
+          newDiv.className = "p-6 bg-base-100 rounded-lg border-l-6 border-l-green-500";
           newDiv.innerHTML = `
               <div class="flex justify-between">
                     <div class="">
@@ -96,8 +104,48 @@ for (const interviewRejectedBtn of interviewRejectedBtns) {
           const parent = document.getElementById("interviewCards");
 
           parent.append(newDiv);
+          calculateJobCount();
         }
-      }
+           
     }
+
+    // If not exists in rejectedList
+    if(!isExistInInterview && !isExistInRejected && event.target.innerText === "REJECTED") {
+
+      // Push the object to rejected list
+      rejectedList.push(jobInfo);
+
+        // loop through the every single element(object) of the rejected list 
+        for (const rejected of rejectedList) {
+          const newDiv = document.createElement("div");
+          newDiv.className ="p-6 bg-base-100 rounded-lg border-l-6 border-l-red-500";
+          newDiv.innerHTML = `
+              <div class="flex justify-between">
+                    <div class="">
+                       <h1 class="industryName font-extrabold text-lg text-[#002C5C]">${jobInfo.industryName.innerText}</h1>
+                       <p class="wantingFor text-[#323B49] text-base">${jobInfo.wantingFor.innerText}</p>
+                    </div>
+                    <button id="deleteBtn" class="btn btn-circle">
+                       <img src="./delete.png" alt="">
+                    </button>
+              </div>
+  
+              <p class="jobDetails my-5">${jobInfo.jobDetails.innerText}</p>
+  
+              <div class="jobStatus badge border-error bg-[#EEF4FF] text-[#002C5C] px-3 py-2 h-auto">Rejected</div>
+  
+              <p class="jobDescription text-[#323B49] mt-2 mb-5">${jobInfo.jobDescription.innerText}</p>
+              
+              <button class="btn btn-outline btn-success jobResult">INTERVIEW</button>
+              <button class="btn btn-outline btn-error jobResult">REJECTED</button>
+           `;
+
+          const parent = document.getElementById("rejectedCards");
+
+          parent.append(newDiv);
+          calculateJobCount();
+        }
+      
+    } 
   });
 }
