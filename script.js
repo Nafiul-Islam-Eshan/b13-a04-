@@ -1,254 +1,133 @@
-let interviewList = [];
-let rejectedList = [];
+let currentTab = "all";
+const allContainer = document.getElementById("jobInfoCards")
+const interviewContainer = document.getElementById("interviewCards")
+const rejectedContainer = document.getElementById("rejectedCards")
+const noJobCard = document.getElementById("noJobCard")
 
-let totalCount = document.querySelector("#totalCount");
-let interviewCount = document.querySelector("#interviewCount");
-let rejectedCount = document.querySelector("#rejectedCount");
-let availableJobQuantity = document.querySelector("#availableJobQuantity");
+const allCount = document.querySelector("#totalCount");
+const interviewCount = document.querySelector("#interviewCount");
+const rejectedCount = document.querySelector("#rejectedCount");
+const availableJobCount = document.querySelector("#availableJobQuantity");
 
-const jobInfoCards = document.querySelector("#jobInfoCards");
-const totalJobs = jobInfoCards.children.length;
-const interviewRejectedBtns = document.getElementsByClassName("jobResult");
+// ====================================== Tab btn functionality ===========================================
+function tabSwitchingStyle (tab){
+    const tabs = ["all", "interview", "rejected"];
+    currentTab = tab;
+    
+    
+    for (const t of tabs) {
+        const selectedTab = document.getElementById("tab-btn-"+t);
 
-function calculateJobCount() {
-  totalCount.innerText = totalJobs;
-  availableJobQuantity.innerText = totalJobs;
-  interviewCount.innerText = interviewList.length;
-  rejectedCount.innerText = rejectedList.length;
+        if (t === tab){
+            selectedTab.classList.add("btn-primary")
+        }
+        else{
+            selectedTab.classList.remove("btn-primary")
+        }
+    }
+
+    if (tab === "all") {
+        if (allContainer.children.length < 1) {
+            allContainer.classList.add("hidden")
+            interviewContainer.classList.add("hidden")
+            rejectedContainer.classList.add("hidden")
+            noJobCard.classList.remove("hidden")
+        }
+        else{
+            allContainer.classList.remove("hidden")
+            interviewContainer.classList.add("hidden")
+            rejectedContainer.classList.add("hidden")
+            noJobCard.classList.add("hidden")
+        }
+    }
+    else if (tab === "interview") {
+
+        if (interviewContainer.children.length < 1) {
+            allContainer.classList.add("hidden")
+            interviewContainer.classList.add("hidden")
+            rejectedContainer.classList.add("hidden")
+            noJobCard.classList.remove("hidden")
+        }
+        else{
+            allContainer.classList.add("hidden")
+            interviewContainer.classList.remove("hidden")
+            rejectedContainer.classList.add("hidden")
+            noJobCard.classList.add("hidden")
+        }
+    }
+    else if (tab === "rejected") {
+        if (rejectedContainer.children.length < 1) {
+            allContainer.classList.add("hidden")
+            interviewContainer.classList.add("hidden")
+            rejectedContainer.classList.add("hidden")
+            noJobCard.classList.remove("hidden")
+        }
+        else{
+            allContainer.classList.add("hidden")
+            interviewContainer.classList.add("hidden")
+            rejectedContainer.classList.remove("hidden")
+            noJobCard.classList.add("hidden")
+        }
+    }
+    jobCountCalculate();
 }
 
-calculateJobCount();
+// ====================================== Job Count calculation =============================================
+function jobCountCalculate(){
 
-function toggleStyle(id) {
-  // Get all tab btns
-  const allBtn = document.querySelector("#tab-btn-all");
-  const interviewBtn = document.querySelector("#tab-btn-interview");
-  const rejectedBtn = document.querySelector("#tab-btn-rejected");
-  const selectedBtn = document.getElementById(id);
-
-  // removing class from all
-  allBtn.classList.remove("btn-primary");
-  interviewBtn.classList.remove("btn-primary");
-  rejectedBtn.classList.remove("btn-primary");
-
-  // adding class to selected btn
-  selectedBtn.classList.add("btn-primary");
-}
-
-for (const interviewRejectedBtn of interviewRejectedBtns) {
-  interviewRejectedBtn.addEventListener("click", function (event) {
-    // Geting the parent of clicked btn
-    const parent = event.target.parentNode;
-
-    // storing datas of parent
-    const industryName = parent.querySelector(".industryName");
-    const wantingFor = parent.querySelector(".wantingFor");
-    const jobDetails = parent.querySelector(".jobDetails");
-    const jobStatus = parent.querySelector(".jobStatus");
-    const jobDescription = parent.querySelector(".jobDescription");
-
-    // Creating object using parent element's infos
-    const jobInfo = {
-      industryName,
-      wantingFor,
-      jobDetails,
-      jobStatus,
-      jobDescription,
+    const count = {
+        all : allContainer.children.length,
+        interview : interviewContainer.children.length,
+        rejected : rejectedContainer.children.length,
     };
 
-
-    // find interviewList contains the object or not
-    const isExistInInterview = interviewList.find(
-      (element) => jobInfo.industryName === element.industryName
-    );
+    allCount.innerText = count.all;
+    interviewCount.innerText = count.interview;
+    rejectedCount.innerText = count.rejected;
     
+    if (currentTab ==="all") available = count.all;
+    else if (currentTab === "interview") available = count.interview;
+    else if (currentTab === "rejected") available = count.rejected;
 
-    // find rejected contains the object or not
-    const isExistInRejected = rejectedList.find(
-      (element) => jobInfo.industryName === element.industryName
-    );
+    availableJobCount.innerText = available;
 
-
-
-    // if not exist in interviewList...
-    if (!isExistInRejected && !isExistInInterview && event.target.innerText === "INTERVIEW") {
-
-      // push the object to the interviewList array
-      interviewList.push(jobInfo);
-      
-      // loop through the every single element(object) of the interviewList array
-      for (const interview of interviewList) {
-        
-        const jobInfoCard = event.target.parentNode;
-        jobInfoCard.innerHTML=`
-            <div class="flex justify-between">
-              <div class="">
-                  <h1 class="industryName font-extrabold text-lg text-[#002C5C]">${jobInfo.industryName.innerText}</h1>
-                  <p class="wantingFor text-[#323B49] text-base">${jobInfo.wantingFor.innerText}</p>
-              </div>
-              <button id="deleteBtn" class="btn btn-circle">
-                  <img src="./delete.png" alt="">
-              </button>
-            </div>
-
-            <p class="jobDetails my-5">${jobInfo.jobDetails.innerText}</p>
-
-            <div class="jobStatus badge border-success bg-[#EEF4FF] text-[#002C5C] px-3 py-2 h-auto">Interview</div>
-
-            <p class="jobDescription text-[#323B49] mt-2 mb-5">${jobInfo.jobDescription.innerText}</p>
-            
-            <button class="btn btn-outline btn-success jobResult">INTERVIEW</button>
-            <button class="btn btn-outline btn-error jobResult">REJECTED</button>
-            `; 
-
-
-        const newDiv = document.createElement("div");
-        newDiv.className = "p-6 bg-base-100 rounded-lg border-l-6 border-l-green-500";
-        newDiv.innerHTML = `
-            <div class="flex justify-between">
-                  <div class="">
-                      <h1 class="industryName font-extrabold text-lg text-[#002C5C]">${jobInfo.industryName.innerText}</h1>
-                      <p class="wantingFor text-[#323B49] text-base">${jobInfo.wantingFor.innerText}</p>
-                  </div>
-                  <button id="deleteBtn" class="btn btn-circle">
-                      <img src="./delete.png" alt="">
-                  </button>
-            </div>
-
-            <p class="jobDetails my-5">${jobInfo.jobDetails.innerText}</p>
-
-            <div class="jobStatus badge border-success bg-[#EEF4FF] text-[#002C5C] px-3 py-2 h-auto">Interview</div>
-
-            <p class="jobDescription text-[#323B49] mt-2 mb-5">${jobInfo.jobDescription.innerText}</p>
-            
-            <button class="btn btn-outline btn-success jobResult">INTERVIEW</button>
-            <button class="btn btn-outline btn-error jobResult">REJECTED</button>
-          `;
-
-        const parent = document.getElementById("interviewCards");
-
-        parent.append(newDiv);
-        calculateJobCount();
-      }
-          
+    if (count[currentTab] < 1){
+        noJobCard.classList.remove("hidden");
     }
-
-    // If not exists in rejectedList
-    if(!isExistInInterview && !isExistInRejected && event.target.innerText === "REJECTED") {
-
-      // Push the object to rejected list
-      rejectedList.push(jobInfo);
-
-        // loop through the every single element(object) of the rejected list 
-        for (const rejected of rejectedList) {
-          event.target.parentNode.innerHTML = `
-              <div class="flex justify-between">
-                    <div class="">
-                       <h1 class="industryName font-extrabold text-lg text-[#002C5C]">${jobInfo.industryName.innerText}</h1>
-                       <p class="wantingFor text-[#323B49] text-base">${jobInfo.wantingFor.innerText}</p>
-                    </div>
-                    <button id="deleteBtn" class="btn btn-circle">
-                       <img src="./delete.png" alt="">
-                    </button>
-              </div>
-  
-              <p class="jobDetails my-5">${jobInfo.jobDetails.innerText}</p>
-  
-              <div class="jobStatus badge border-error bg-[#EEF4FF] text-[#002C5C] px-3 py-2 h-auto">Rejected</div>
-  
-              <p class="jobDescription text-[#323B49] mt-2 mb-5">${jobInfo.jobDescription.innerText}</p>
-              
-              <button class="btn btn-outline btn-success jobResult">INTERVIEW</button>
-              <button class="btn btn-outline btn-error jobResult">REJECTED</button>
-           `;
-
-          const newDiv = document.createElement("div");
-          newDiv.className ="p-6 bg-base-100 rounded-lg border-l-6 border-l-red-500";
-          newDiv.innerHTML = `
-              <div class="flex justify-between">
-                    <div class="">
-                       <h1 class="industryName font-extrabold text-lg text-[#002C5C]">${jobInfo.industryName.innerText}</h1>
-                       <p class="wantingFor text-[#323B49] text-base">${jobInfo.wantingFor.innerText}</p>
-                    </div>
-                    <button id="deleteBtn" class="btn btn-circle">
-                       <img src="./delete.png" alt="">
-                    </button>
-              </div>
-  
-              <p class="jobDetails my-5">${jobInfo.jobDetails.innerText}</p>
-  
-              <div class="jobStatus badge border-error bg-[#EEF4FF] text-[#002C5C] px-3 py-2 h-auto">Rejected</div>
-  
-              <p class="jobDescription text-[#323B49] mt-2 mb-5">${jobInfo.jobDescription.innerText}</p>
-              
-              <button class="btn btn-outline btn-success jobResult">INTERVIEW</button>
-              <button class="btn btn-outline btn-error jobResult">REJECTED</button>
-           `;
-
-          const parent = document.getElementById("rejectedCards");
-
-          parent.append(newDiv);
-          calculateJobCount();
-        }
-      
-    } 
-  });
+    else {
+        noJobCard.classList.add("hidden")
+    }
 }
+jobCountCalculate();
 
 
+document.querySelector("#mainContainer").addEventListener("click", (event) => {
+    const targetElement = event.target;            // capturing clicked element
+    const cards = targetElement.closest(".Card");   // capturing clicked job card
+    if (!cards) return; // ignores clicking outside of cards
 
-document.querySelector("#tabBtns").addEventListener("click", function(event){
+    const jobStatus = cards.querySelector(".jobStatus");
 
-  const availableJobQuantity = document.querySelector("#availableJobQuantity")
-  const allCards = document.querySelector("#jobInfoCards")
-  const noJobCard = document.querySelector("#noJobCard")
-  const interviewCards = document.querySelector("#interviewCards")
-  const rejectedCards = document.querySelector("#rejectedCards")
-
-
-  if (event.target.innerText === "All"){
-    availableJobQuantity.innerText = jobInfoCards.children.length;
-    allCards.classList.remove("hidden");
-    noJobCard.classList.add("hidden");
-    interviewCards.classList.add("hidden");
-    rejectedCards.classList.add("hidden");
-  }
-  else if (event.target.innerText === "Interview"){
-
-    availableJobQuantity.innerText = interviewCards.children.length;
-
-    if (interviewCards.children.length === 0){
-      allCards.classList.add("hidden");
-      noJobCard.classList.remove("hidden");
-      interviewCards.classList.add("hidden");
-      rejectedCards.classList.add("hidden");
+    if (targetElement.classList.contains("interview")) {
+      if (jobStatus) {
+        jobStatus.innerText = "INTERVIEW";
+        jobStatus.className = "jobStatus badge badge-success border-none px-3 py-2 h-auto";
+      }
+      interviewContainer.appendChild(cards);
+      jobCountCalculate();
     }
+    if (targetElement.classList.contains("rejected")){
+        if (jobStatus) {
+            jobStatus.innerText = "REJECTED";
+            jobStatus.className = "jobStatus badge badge-error border-none px-3 py-2 h-auto";
+        }
 
-    else{
-      allCards.classList.add("hidden");
-      noJobCard.classList.add("hidden");
-      interviewCards.classList.remove("hidden");
-      rejectedCards.classList.add("hidden");
+        rejectedContainer.appendChild(cards);
+        jobCountCalculate();
     }
-  }
-  else if (event.target.innerText === "Rejected"){
-    
-     availableJobQuantity.innerText = rejectedCards.children.length;
-
-    if (rejectedCards.children.length === 0){
-      allCards.classList.add("hidden");
-      noJobCard.classList.remove("hidden");
-      interviewCards.classList.add("hidden");
-      rejectedCards.classList.add("hidden");
+    if (targetElement.classList.contains("deleteBtns")){
+        cards.remove();
+        jobCountCalculate();
     }
+});
 
-    else{
-      allCards.classList.add("hidden");
-      noJobCard.classList.add("hidden");
-      interviewCards.classList.add("hidden");
-      rejectedCards.classList.remove("hidden");
-    }
-  }
-
-
-})
